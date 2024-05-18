@@ -6,7 +6,31 @@ class Overworld {
     }
 
     init() {
-        console.log("HELLO FROM OVERWORLD", this);
+        //background
+        const image = new Image() //The image class is a built-in global object in Javascript provided by the browser's WEB API
+        image.onload = () => {
+            this.ctx.drawImage(image, 0, 0)
+        }       
+        image.src="/images/maps/DemoLower.png"
+
+        //person
+        const x = 0
+        const y = 0
+        const hero = new Image()
+        hero.onload = () => {
+            this.ctx.drawImage(
+                hero,
+                0, //left cut
+                0, //top cut
+                32, //width of cut (size px)
+                32, //height of cut (size px)
+                x, //placement x axis
+                y, //placement y axis
+                32, //size of character
+                32 // size of character
+            )
+        }
+        hero.src="/images/characters/people/hero.png"
     }
 
 }
