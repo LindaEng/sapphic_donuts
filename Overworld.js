@@ -16,6 +16,24 @@ class Overworld {
         //person
         const x = 5
         const y = 6
+
+        const shadow = new Image()
+        shadow.onload = () => {
+            this.ctx.drawImage(
+                shadow,
+                0, //left cut
+                0, //top cut
+                32, //width of cut (size px)
+                32, //height of cut (size px)
+                x * 16 - 8, //placement x axis
+                y * 16 - 16, //placement y axis
+                32, //size of character
+                32 // size of character
+            )
+        }
+
+        shadow.src ="/images/characters/shadow.png"
+
         const hero = new Image()
         hero.onload = () => {
             this.ctx.drawImage(
