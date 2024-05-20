@@ -5,30 +5,19 @@ class Overworld {
         this.ctx = this.canvas.getContext("2d")
     }
 
+    startGameLoop() {
+        const step = () => {
+            //requestAnimationFrame is from window
+            requestAnimationFrame(() => {
+                step()
+            })
+        }
+        step() //starts the loop
+    }
+
     init() {
-        //background
-        const image = new Image() //The image class is a built-in global object in Javascript provided by the browser's WEB API
-        image.onload = () => {
-            this.ctx.drawImage(image, 0, 0)
-        }       
-        image.src="/images/maps/DemoLower.png"
 
-        //Place game objects
-        const hero = new GameObject({
-            x: 5,
-            y: 6
-        })
-
-        const npc1 = new GameObject({
-            x: 7,
-            y: 9,
-            src: "/images/characters/people/npc1.png"
-        })
-
-        setTimeout(() => {
-            hero.sprite.draw(this.ctx)
-            npc1.sprite.draw(this.ctx)
-        },200)
+        this.startGameLoop()
 
     }
 
