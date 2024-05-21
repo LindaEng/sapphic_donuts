@@ -1,4 +1,13 @@
 class Sprite {
+    /**
+     * Creates a new Sprite object.
+     * @param {Object} config - The configuration object for the Sprite.
+     * @param {string} config.src - The source URL of the image for the Sprite.
+     * @param {Object} config.animations - The animations for the Sprite.
+     * @param {string} config.currentAnimation - The current animation of the Sprite.
+     * @param {number} config.animationFrameLimit - The limit of animation frames for the Sprite.
+     * @param {Object} config.gameObject - The game object associated with the Sprite.
+     */
     constructor(config) {
         //Set up the Image
         this.image = new Image()
@@ -24,24 +33,28 @@ class Sprite {
             "idle-up": [ [0,2] ],
             "idle-left": [ [1,3] ],
             "walk-down": [ [1,0], [0,0], [3,0], [0,0] ],
-            "walk-right": [ [0,1], [1,1], [2,1], [3,1] ],
+            "walk-right": [ [1,1], [0,1], [1,1], [0,1] ],
             "walk-up": [ [0,2], [1,2], [2,2], [3,2] ],
-            "walk-left": [ [1,3], [2,3], [3,3], [0,3] ],
+            "walk-left": [ [0,3], [1,3], [2,3], [3,3] ],
         } // all animations of sprite. Default of idleDown
-        this.currentAnimation = "walk-left" //config.currentAnimation || "idle-down"
+        this.currentAnimation = config.currentAnimation || "idle-down"
         this.currentAnimationFrame = 0 // first animation frame
 
-        this.animationFrameLimit = config.animationFrameLimit || 16 //element of time  - game loop frames
+        this.animationFrameLimit = config.animationFrameLimit || 8 //game loop frames - how long should each frame stay
         this.animationFrameProgress = this.animationFrameLimit
 
         //Reference the game object
         this.gameObject = config.gameObject
     }
 
-    get frame() {
+    get frame() { //gets current frame - util function
         return this.animations[this.currentAnimation][this.currentAnimationFrame]
     }
 
+    /**
+     * Sets the animation for the sprite.
+     * @param {string} key - The key of the animation to set.
+     */
     setAnimation(key) {
         if(this.currentAnimation !== key) { //if its another direction
             this.currentAnimation = key
@@ -50,22 +63,29 @@ class Sprite {
         }
     }
 
+    /**
+     * Updates the animation progress of the sprite.
+     * Decreases the animation frame progress by 1, and increments the current animation frame by 1.
+     * Resets the animation frame progress and sets the current animation frame to 0 if the frame is undefined.
+     */
     updateAnimationProgress() {
-        //downtick frame progrss
         if(this.animationFrameProgress > 0) {
             this.animationFrameProgress -= 1
             return
         }
-
-        //reset the counter
+        //resets frame progress
         this.animationFrameProgress = this.animationFrameLimit
-        this.currentAnimationFrame += 1
-        
+        this.currentAnimationFrame += 1 //helps move through the animation array
         if(this.frame === undefined) {
-            this.currentAnimationFrame = 0
+            this.currentAnimationFrame = 0 //cycles back to 0 index
         }
     }
 
+    /**
+     * Draws the shadow and sprite of the game object on the canvas.
+     * 
+     * @param {CanvasRenderingContext2D} ctx - The rendering context of the canvas.
+     */
     draw(ctx) { //Draws Shadow and Sprite
         const x = this.gameObject.x - 8
         const y = this.gameObject.y - 16
@@ -83,6 +103,7 @@ class Sprite {
             x,y, // placement of x and y
             32,32 // size of character
         )
+
         this.updateAnimationProgress()
     }
 

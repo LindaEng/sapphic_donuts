@@ -22,8 +22,8 @@ class Overworld {
 
             //Draw Game Objects
             Object.values(this.map.gameObjects).forEach((object) => {
-                object.update({
-                    arrow: this.directionInput.direction
+                object.update({ // .update from Person
+                    arrow: this.directionInput.direction  //invoked from DirectionInput - getter so no ()
                 })
                 object.sprite.draw(this.ctx)
             })
@@ -43,8 +43,9 @@ class Overworld {
         this.map = new OverworldMap(window.OverworldMaps.DemoRoom)
 
         this.directionInput = new DirectionInput()
-        this.directionInput.init()
+        this.directionInput.init()//Even though init is called only once, the event listeners it sets up will continue to listen for keyboard events for the lifetime of the page (or until they are explicitly removed). This is how the direction can be continuously updated even though init is only called once.
         this.startGameLoop()
     }
 
 }
+  
