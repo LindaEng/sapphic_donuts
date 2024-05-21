@@ -42,6 +42,14 @@ class Sprite {
         return this.animations[this.currentAnimation][this.currentAnimationFrame]
     }
 
+    setAnimation(key) {
+        if(this.currentAnimation !== key) { //if its another direction
+            this.currentAnimation = key
+            this.currentAnimationFrame = 0 //set to the first frame
+            this.animationFrameProgress = this.animationFrameLimit
+        }
+    }
+
     updateAnimationProgress() {
         //downtick frame progrss
         if(this.animationFrameProgress > 0) {
