@@ -1,3 +1,7 @@
+/**
+ * Represents the overworld of the game.
+ * @class
+ */
 class Overworld {
     constructor(config) {
         this.element = config.element
@@ -5,7 +9,10 @@ class Overworld {
         this.ctx = this.canvas.getContext("2d")
         this.map = null
     }
-    //helps update frames
+
+    /**
+     * Starts the game loop.
+     */
     startGameLoop() {
         const step = () => {
             //clean canvas for every loop 
@@ -15,7 +22,7 @@ class Overworld {
 
             //Draw Game Objects
             Object.values(this.map.gameObjects).forEach((object) => {
-                object.x += 0.2
+                object.update({})
                 object.sprite.draw(this.ctx)
             })
 

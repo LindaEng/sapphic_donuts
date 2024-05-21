@@ -1,4 +1,16 @@
-class OverworldMap {
+/**
+ * Represents an overworld map in the pizza game.
+ * @class
+ */
+class OverworldMap { 
+    /**
+     * Creates an instance of OverworldMap.
+     * @constructor
+     * @param {Object} config - The configuration object for the OverworldMap.
+     * @param {Object} config.gameObjects - The Object of game objects on the map.
+     * @param {string} config.lowerSrc - The source URL of the lower image layer.
+     * @param {string} config.upperSrc - The source URL of the upper image layer.
+     */
     constructor(config) {
         this.gameObjects = config.gameObjects
 
@@ -9,10 +21,18 @@ class OverworldMap {
         this.upperImage.src = config.upperSrc
     }
 
+    /**
+     * Draws the lower image layer on the canvas context.
+     * @param {CanvasRenderingContext2D} ctx - The canvas rendering context.
+     */
     drawLowerImage(ctx) {
         ctx.drawImage(this.lowerImage, 0, 0)
     }
 
+    /**
+     * Draws the upper image layer on the canvas context.
+     * @param {CanvasRenderingContext2D} ctx - The canvas rendering context.
+     */
     drawUpperImage(ctx) {
         ctx.drawImage(this.upperImage, 0, 0)
     }
@@ -23,15 +43,15 @@ window.OverworldMaps = {
         lowerSrc: "/images/maps/DemoLower.png",
         upperSrc: "/images/maps/DemoUpper.png",
         gameObjects: {
-            hero: new GameObject({
-                x: 5,
-                y: 6
+            hero: new Person({
+                x: utils.withGrid(5),
+                y: utils.withGrid(6)
             }),
-            npc1: new GameObject({
-                x: 7,
-                y: 9,
-                src: "/images/characters/people/npc1.png"
-            })
+            // renee: new GameObject({
+            //     x: 7,
+            //     y: 9,
+            //     src: "/images/characters/people/Renee.png"
+            // })
         }
     },
     Kitchen: {
@@ -39,18 +59,18 @@ window.OverworldMaps = {
         upperSrc: "/images/maps/KitchenUpper.png",
         gameObjects: {
             hero: new GameObject({
-                x: 5,
-                y: 6
+                x: utils.withGrid(5),
+                y: utils.withGrid(6)
             }),
-            npc1: new GameObject({
+            renee: new GameObject({
                 x: 7,
                 y: 9,
-                src: "/images/characters/people/npc1.png"
+                src: "/images/characters/people/Renee.png"
             }),
-            npcA: new GameObject({
+            Indigo: new GameObject({
                 x: 7,
                 y: 9,
-                src: "/images/characters/people/npc2.png"
+                src: "/images/characters/people/Indigo.png"
             }),
             npcB: new GameObject({
                 x: 10,
