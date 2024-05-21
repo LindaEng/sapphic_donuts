@@ -1,7 +1,7 @@
 class Person extends GameObject {
     constructor(config) {
         super(config)
-        this.movingProgressRemaining = 16
+        this.movingProgressRemaining = 0
 
         this.directionUpdate = {
             "up": ["y", -1],
@@ -14,6 +14,12 @@ class Person extends GameObject {
 
     update(state) {
         this.updatePosition()
+
+        if (this.movingProgressRemaining === 0 && state.arrow) {
+            this.direction = state.arrow
+            this.movingProgressRemaining = 4
+        }
+
     }
 
     updatePosition() {
