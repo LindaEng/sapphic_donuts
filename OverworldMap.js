@@ -25,16 +25,20 @@ class OverworldMap {
      * Draws the lower image layer on the canvas context.
      * @param {CanvasRenderingContext2D} ctx - The canvas rendering context.
      */
-    drawLowerImage(ctx) {
-        ctx.drawImage(this.lowerImage, 0, 0)
+    drawLowerImage(ctx, cameraPerson) {
+        ctx.drawImage(this.lowerImage, 
+        utils.withGrid(10.5) - cameraPerson.x, 
+        utils.withGrid(6) - cameraPerson.y)
     }
 
     /**
      * Draws the upper image layer on the canvas context.
      * @param {CanvasRenderingContext2D} ctx - The canvas rendering context.
      */
-    drawUpperImage(ctx) {
-        ctx.drawImage(this.upperImage, 0, 0)
+    drawUpperImage(ctx, cameraPerson) {
+        ctx.drawImage(this.upperImage, 
+        utils.withGrid(10.5) - cameraPerson.x, 
+        utils.withGrid(6) - cameraPerson.y)
     }
 }
 
@@ -48,11 +52,11 @@ window.OverworldMaps = {
                 x: utils.withGrid(5),
                 y: utils.withGrid(6)
             }),
-            // renee: new Person({
-            //     x: utils.withGrid(7),
-            //     y: utils.withGrid(9),
-            //     src: "/images/characters/people/Renee.png"
-            // })
+            renee: new Person({
+                x: utils.withGrid(7),
+                y: utils.withGrid(9),
+                src: "/images/characters/people/Renee.png"
+            })
         }
     },
     Kitchen: {

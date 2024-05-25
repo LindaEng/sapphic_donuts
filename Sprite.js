@@ -86,9 +86,9 @@ class Sprite {
      * 
      * @param {CanvasRenderingContext2D} ctx - The rendering context of the canvas.
      */
-    draw(ctx) { //Draws Shadow and Sprite
-        const x = this.gameObject.x - 8
-        const y = this.gameObject.y - 16
+    draw(ctx, cameraPerson) { //Draws Shadow and Sprite
+        const x = this.gameObject.x - 8 + utils.withGrid(10.5) - cameraPerson.x
+        const y = this.gameObject.y - 18 + utils.withGrid(6) - cameraPerson.y
 
         this.isShadowLoaded && ctx.drawImage(this.shadow,
             x,y,
